@@ -2,6 +2,8 @@ from play import recognise_speech
 import speech_recognition as sr
 import random
 import time
+from playsound import playsound
+
 
 if __name__ == "__main__":
     WORDS = ["apple", "banana", "grape", "orange", "mango", "lemon"]
@@ -18,7 +20,7 @@ if __name__ == "__main__":
         "{words}\n"
         "You have {n} tries to guess which one.\n"
     ).format(words=', '.join(WORDS), n=NUM_GUESSES)
-
+    playsound("letsplay.wav")
     print(instructions)
     time.sleep(3)
 
@@ -40,9 +42,12 @@ if __name__ == "__main__":
 
         if guess_is_correct:
             print("Correct! You win!".format(word))
+            playsound("congratulations.wav")
             break
         elif user_has_more_attempts:
             print("Incorrect. Try again.\n")
+            playsound("keep_going.wav")
         else:
             print("Sorry, you lose!\nI was thinking of '{}'.".format(word))
+            playsound("loser.wav")
             break
